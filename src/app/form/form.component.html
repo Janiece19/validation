@@ -1,0 +1,84 @@
+<h1>Form Validations</h1>
+<form [formGroup]="loginForm">
+
+  <div>
+    <label for="username">User Name</label>
+    <input type="text" formControlName="username">
+    <small [hidden]="loginForm.controls['username'].valid||loginForm.controls['username'].pristine">
+      <span [hidden]="!loginForm.controls.username.hasError('invalidPattern')">Username pattern is not valid </span>
+      <span [hidden]="!loginForm.controls.username.hasError('maxlengthValidator')">Max length is 20 </span>
+    </small>
+  </div>
+  <p>Name value: {{ loginForm.get('username').value }}</p>
+<br>
+<br>
+
+
+  <div>
+    <label for="passwrd">Password</label>
+    <input type="text" formControlName="passwrd">
+    <small [hidden]="loginForm.controls['passwrd'].valid||loginForm.controls['passwrd'].pristine">
+      <!-- <span [hidden]="!loginForm.controls.passwrd.hasError('invalidPattern')">Invalid Password </span> -->
+      <span [hidden]="!loginForm.controls.passwrd.hasError('maxlength1Validator')">Max length is 8 </span>
+    </small>
+  </div>
+<br>
+<br>
+  <div>
+    <label for="confirmpasswd">Re-enter Password</label>
+    <input type="text" formControlName="confirmpasswd">
+    <small [hidden]="loginForm.controls['confirmpasswd'].valid||loginForm.controls['confirmpasswd'].pristine">
+     <span [hidden]="!loginForm.controls.confirmpasswd.hasError('notSame')">Password does not match </span> 
+      <!-- <span [hidden]="!loginForm.controls.retypepasswd.hasError('invalidPattern')">Invalid Email</span> -->
+   </small>
+  </div> 
+<br>
+<br>
+  <div>
+    <label for="email">Email</label>
+    <input type="text" formControlName="email">
+    <small [hidden]="loginForm.controls['email'].valid||loginForm.controls['email'].pristine">
+      <span [hidden]="!loginForm.controls.email.hasError('required')">Email is required </span>
+      <span [hidden]="!loginForm.controls.email.hasError('invalidPattern')">Invalid Email</span>
+    </small>
+  </div>
+<br>
+<br>
+  <div>
+    <label for="dob">Date of Birth</label>
+    <input type="date" formControlName="dob">
+    <small [hidden]="loginForm.controls['dob'].valid||loginForm.controls['dob'].pristine">
+     <!--<span [hidden]="!loginForm.controls.dob.hasError('required')">DOB is required </span>-->
+      <span [hidden]="!loginForm.controls.dob.hasError('dateOfBirthValidator')">Invalid DOB</span>
+    </small>
+  </div>
+<br>
+<br>
+
+  <div>
+    <label for="time">Start Time</label>
+    <input type="date" formControlName="time1">
+
+    <label for="time">End Time</label>
+    <input type="date" formControlName="time2">
+    <small [hidden]="loginForm.controls['time1'].valid &&loginForm.controls['time2'].valid||loginForm.controls['time1'].pristine">
+      <!-- <span [hidden]="!loginForm.controls.time1.hasError('required')"> Required </span> -->
+      <!--<span [hidden]="!loginForm.controls.time1.hasError('dateAndTimeValidator')">Start date should be less than end date</span>-->
+     <span [hidden]="!loginForm.controls.time2.hasError('dateAndTimeValidator')">Start date should be less than end date</span>
+      <span [hidden]="!loginForm.controls.time1.hasError('InvalidDate1')">Invalid start date format</span>
+     <span [hidden]="!loginForm.controls.time2.hasError('InvalidDate2')">Invalid end date format</span> 
+    </small>
+  </div>
+
+
+
+ 
+
+<br>
+<br>
+  <input type="Submit" value="Submit" name="submit" [disabled]="loginForm.invalid">
+  <input type="reset" value="clear">
+
+  <p>Form value: {{ loginForm.value | json }}</p>
+<p>Form status: {{ loginForm.status | json }}</p>
+</form>
